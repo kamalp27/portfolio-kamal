@@ -71,6 +71,80 @@ export const PROJECTS_DATA: ProjectRecord[] = [
     liveDemoUrl: undefined, // Live demo not available on this portfolio
   },
   {
+    id: 'documind-ai',
+    title: 'DocuMind AI',
+    categoryLabel: 'Full-Stack RAG &bull; Document QA',
+    isFlagship: false,
+    shortDescription:
+      'An AI-powered document question-answering application that uses Retrieval-Augmented Generation (RAG) to help users ask questions about PDF documents and receive grounded answers with page-level citations.',
+    problem:
+      'Extracting precise information from dense multi-page documents is time-consuming, while general-purpose LLMs can hallucinate unsupported answers without verifiable references.',
+    approach:
+      'Engineered an end-to-end RAG architecture with a FastAPI backend and React 18/TypeScript frontend. The system extracts and chunks PDF text with PyMuPDF, computes dense vector embeddings using Sentence Transformers, indexes vectors in ChromaDB, and synthesizes grounded answers using Google Gemini with page-level citations and bounded timeout/retry handling.',
+    technicalHighlights: [
+      'Page-by-page PDF ingestion pipeline validating magic bytes, rejecting scanned/empty files, and preserving 1-indexed page boundaries.',
+      'Deterministic text chunking (800 chars, 120 overlap) with dense vector indexing in ChromaDB using all-MiniLM-L6-v2 embeddings.',
+      'Document-scoped semantic retrieval calibrated to a 0.85 cosine distance threshold, featuring single-document summary fallback.',
+      'Grounded prompt construction isolating untrusted document content inside XML boundary tags to defend against prompt injection.',
+      'Resilient Google Gemini (gemini-3.6-flash) integration with 45-second client timeouts, LOW thinking level, and bounded 503/504 retries.',
+      'Interactive React UI with slide-in Citation Drawer displaying source document, page numbers, similarity match score, and verbatim excerpt.',
+      'Full test automation across 75 backend pytest integration tests and 31 frontend Vitest component tests (100% pass rate).',
+    ],
+    evaluationMethodology:
+      'Verified through automated end-to-end integration tests (75 backend tests, 31 frontend component tests) covering semantic retrieval, threshold calibration, citation mapping, and bounded error recovery.',
+    resultsAndMetrics: [
+      {
+        metric: '106',
+        label: 'Automated Tests Passed',
+        context: '75 backend (pytest) and 31 frontend (Vitest) tests',
+        category: 'Quality',
+        verified: true,
+      },
+      {
+        metric: '0.85',
+        label: 'Cosine Distance Cutoff',
+        context: 'Calibrated relevance threshold for semantic retrieval',
+        category: 'Retrieval',
+        verified: true,
+      },
+      {
+        metric: '45 s',
+        label: 'Client Timeout Budget',
+        context: 'Bounded Gemini API deadline with 503/504 retries',
+        category: 'Reliability',
+        verified: true,
+      },
+      {
+        metric: '384-d',
+        label: 'Dense Embeddings',
+        context: 'all-MiniLM-L6-v2 sentence transformer vectors',
+        category: 'Pipeline',
+        verified: true,
+      },
+      {
+        metric: '10 MB',
+        label: 'Max File Size',
+        context: 'Enforced file size limit with PDF signature validation',
+        category: 'System',
+        verified: true,
+      },
+    ],
+    projectStatus: 'Completed',
+    technologyStack: [
+      'Python',
+      'FastAPI',
+      'React',
+      'TypeScript',
+      'Vite',
+      'Google Gemini',
+      'Sentence Transformers',
+      'ChromaDB',
+      'RAG',
+    ],
+    githubUrl: 'https://github.com/kamalp27/documind-ai',
+    liveDemoUrl: undefined, // Live demo not available; deployment pending
+  },
+  {
     id: 'ai-knowledge-base',
     title: 'AI Knowledge Base',
     categoryLabel: 'RAG & Retrieval Evaluation',

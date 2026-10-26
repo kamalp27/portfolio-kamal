@@ -52,10 +52,12 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                 href={project.githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
+                title={`View ${project.title} on GitHub`}
                 aria-label={`View ${project.title} source repository on GitHub`}
-                className="p-2 rounded bg-[#101827] border border-[#243447] text-[#94A3B8] hover:text-[#78A9FF] hover:border-[#78A9FF]/40 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#78A9FF]"
+                className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded bg-[#101827] border border-[#243447] text-[#94A3B8] hover:text-[#78A9FF] hover:border-[#78A9FF]/40 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#78A9FF] text-xs font-mono"
               >
-                <GithubIcon size={16} aria-hidden="true" />
+                <GithubIcon size={15} aria-hidden="true" />
+                <span>GitHub</span>
               </a>
             ) : null}
 
@@ -119,7 +121,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
                 Evaluation & Results
               </span>
               <span className="text-[10px] font-mono text-[#64748B] bg-[#101827] px-2 py-0.5 rounded border border-[#243447]">
-                Resume-Reported Claims
+                {project.projectStatus === 'Completed' ? 'Verified Project Specifications' : 'Resume-Reported Claims'}
               </span>
             </div>
 
@@ -192,7 +194,19 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
               <div>
                 <span className="text-[#64748B]">Repository: </span>
                 <span className="text-[#F3F5F8]">
-                  {project.githubUrl ? 'Publicly Available' : 'Repository link not provided'}
+                  {project.githubUrl ? (
+                    <a
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[#78A9FF] hover:underline inline-flex items-center gap-1"
+                    >
+                      <span>Publicly Available on GitHub</span>
+                      <ExternalLink size={12} aria-hidden="true" />
+                    </a>
+                  ) : (
+                    'Repository link not provided'
+                  )}
                 </span>
               </div>
               <div>
